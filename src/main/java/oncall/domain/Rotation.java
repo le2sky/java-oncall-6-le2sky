@@ -53,4 +53,14 @@ public class Rotation {
 
         return picked;
     }
+
+    public boolean isSame(Rotation other) {
+        for (Employee employee : other.rotation) {
+            if (!this.rotation.contains(employee)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

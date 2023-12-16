@@ -12,6 +12,7 @@ public class Rotation {
     private static final String INVALID_EMPLOYEES_SIZE_MESSAGE =
             "로테이션에 포함되는 사원의 수는 최소 " + MIN_ROTATION_SIZE + "명에서 " + MAX_ROTATION_SIZE + "명입니다.";
 
+    // TODO : 이거 안쓸거야?
     private final List<Employee> employees;
     private final Queue<Employee> rotation;
 

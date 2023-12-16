@@ -8,6 +8,7 @@ import oncall.domain.OnCallMonth;
 class OutputView {
 
     private static final String PRINT_EXCEPTION_MESSAGE_FORMAT = "[ERROR] %s%n";
+    private static final String PRINT_RESULT_FORMAT = "%d월 %d일 %s %s%n";
 
     private OutputView() {
     }
@@ -18,7 +19,7 @@ class OutputView {
 
     public static void printResult(OnCallMonth month, List<AssignResult> results) {
         for (AssignResult assignResult : results) {
-            System.out.format("%d월 %d일 %s %s%n",
+            System.out.format(PRINT_RESULT_FORMAT,
                     month.getMonth(),
                     assignResult.day(),
                     OnCallDayOfWeek.from(assignResult.dayOfWeek()),

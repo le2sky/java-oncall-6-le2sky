@@ -1,5 +1,6 @@
 package oncall.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
@@ -42,6 +43,18 @@ class RotationTest {
 
         assertThatThrownBy(() -> Rotation.from(employees))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로테이션에서 한 명의 근무자를 선택할 수 있다.")
+    @Test
+    void pickOne() {
+        Rotation rotation = Rotation.from(createEmployees());
+
+        Employee pobi = rotation.pickOne();
+        Employee lee = rotation.pickOne();
+
+        assertThat(pobi).isEqualTo(Employee.from(Name.from("pobi")));
+        assertThat(lee).isEqualTo(Employee.from(Name.from("lee")));
     }
 
     private static List<Employee> createEmployees() {

@@ -1,6 +1,8 @@
 package oncall.domain;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Rotation {
 
@@ -11,9 +13,11 @@ public class Rotation {
             "로테이션에 포함되는 사원의 수는 최소 " + MIN_ROTATION_SIZE + "명에서 " + MAX_ROTATION_SIZE + "명입니다.";
 
     private final List<Employee> employees;
+    private final Queue<Employee> rotation;
 
     private Rotation(List<Employee> employees) {
         this.employees = employees;
+        this.rotation = new LinkedList<>(employees);
     }
 
     public static Rotation from(List<Employee> employees) {
@@ -40,5 +44,12 @@ public class Rotation {
                 .distinct()
                 .toList()
                 .size();
+    }
+
+    public Employee pickOne() {
+        Employee picked = rotation.poll();
+        rotation.offer(picked);
+
+        return picked;
     }
 }

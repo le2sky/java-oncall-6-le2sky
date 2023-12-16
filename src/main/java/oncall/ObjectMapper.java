@@ -11,10 +11,12 @@ import oncall.domain.Rotation;
 
 class ObjectMapper {
 
-    public static final String INVALID_FORMAT_MESSAGE = "유효한 형식으로 입력해주세요.";
+    private static final int ON_CALL_MONTH_ARG_SIZE = 2;
+    private static final String INVALID_FORMAT_MESSAGE = "유효한 형식으로 입력해주세요.";
+    private static final String SPLIT_DELIMITER = ",";
 
     public static OnCallMonth mapToOnCallMonth(String input) {
-        String[] split = input.split(",");
+        String[] split = input.split(SPLIT_DELIMITER);
         checkValidFormat(split);
         checkNumberFormat(split[0]);
 
@@ -33,7 +35,7 @@ class ObjectMapper {
     }
 
     private static void checkValidFormat(String[] split) {
-        if (split.length != 2) {
+        if (split.length != ON_CALL_MONTH_ARG_SIZE) {
             throw new IllegalArgumentException(INVALID_FORMAT_MESSAGE);
         }
     }
@@ -46,7 +48,7 @@ class ObjectMapper {
     }
 
     private static Rotation mapToRotation(String rotationString) {
-        List<Employee> employees = Arrays.stream(rotationString.split(","))
+        List<Employee> employees = Arrays.stream(rotationString.split(SPLIT_DELIMITER))
                 .map(Name::from)
                 .map(Employee::from)
                 .toList();

@@ -18,7 +18,8 @@ class SimpleOnCallCalendar implements OnCallCalendar {
                 onCallMonth.getDayOfWeek(day) == DayOfWeek.SUNDAY;
     }
 
-    private boolean isStatutoryHoliday(OnCallMonth onCallMonth, int day) {
+    @Override
+    public boolean isStatutoryHoliday(OnCallMonth onCallMonth, int day) {
         if (onCallMonth.getMonth() == 1 && day == 1) {
             return true;
         }

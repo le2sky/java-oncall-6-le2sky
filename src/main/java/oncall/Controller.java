@@ -8,9 +8,14 @@ import oncall.domain.OnCallMonth;
 class Controller {
 
     public void run() {
+        SimpleOnCallCalendar onCallCalendar = new SimpleOnCallCalendar();
         OnCallMonth onCallMonth = getOnCallMonth();
         OnCall onCall = getOnCall();
-        OutputView.printResult(onCallMonth, onCall.assign(new SimpleOnCallCalendar(), onCallMonth));
+        OutputView.printResult(
+                onCallCalendar,
+                onCallMonth,
+                onCall.assign(onCallCalendar, onCallMonth)
+        );
     }
 
     private static OnCallMonth getOnCallMonth() {

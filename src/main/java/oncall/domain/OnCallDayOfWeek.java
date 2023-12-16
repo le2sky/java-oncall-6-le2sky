@@ -31,6 +31,13 @@ public enum OnCallDayOfWeek {
                 .getDayOfWeek();
     }
 
+    public static String from(DayOfWeek dayOfWeek) {
+        return Arrays.stream(values()).filter(onCallDayOfWeek -> onCallDayOfWeek.dayOfWeek.equals(dayOfWeek))
+                .findFirst()
+                .orElseThrow()
+                .value;
+    }
+
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }

@@ -2,6 +2,9 @@ package oncall.domain;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public enum OnCallMonth {
 
@@ -40,7 +43,25 @@ public enum OnCallMonth {
         this.startDayOfWeek = startDayOfWeek;
     }
 
+    public int getMonth() {
+        return month;
+    }
+
     public int getEndDay() {
         return endDay;
+    }
+
+    public DayOfWeek getDayOfWeek(int day) {
+        List<DayOfWeek> values = Arrays.stream(DayOfWeek.values()).toList();
+        Queue<DayOfWeek> dayOfWeeks = new LinkedList<>(values);
+        while(!dayOfWeeks.peek().equals(startDayOfWeek)) {
+            dayOfWeeks.offer(dayOfWeeks.poll());
+        }
+
+        for (int i = 0; i < day - 1; i++) {
+            dayOfWeeks.offer(dayOfWeeks.poll());
+        }
+
+        return dayOfWeeks.peek();
     }
 }

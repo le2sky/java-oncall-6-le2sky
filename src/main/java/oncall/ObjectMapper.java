@@ -1,7 +1,13 @@
 package oncall;
 
+import java.util.Arrays;
+import java.util.List;
+import oncall.domain.Employee;
+import oncall.domain.Name;
+import oncall.domain.OnCall;
 import oncall.domain.OnCallDayOfWeek;
 import oncall.domain.OnCallMonth;
+import oncall.domain.Rotation;
 
 class ObjectMapper {
 
@@ -30,5 +36,21 @@ class ObjectMapper {
         if (split.length != 2) {
             throw new IllegalArgumentException(INVALID_FORMAT_MESSAGE);
         }
+    }
+
+    public static OnCall mapToOnCall(String workDayRotationString, String holiDayRotationString) {
+        Rotation workDayRotation = mapToRotation(workDayRotationString);
+        Rotation holiDayRotation = mapToRotation(holiDayRotationString);
+
+        return OnCall.of(workDayRotation, holiDayRotation);
+    }
+
+    private static Rotation mapToRotation(String rotationString) {
+        List<Employee> employees = Arrays.stream(rotationString.split(","))
+                .map(Name::from)
+                .map(Employee::from)
+                .toList();
+
+        return Rotation.from(employees);
     }
 }

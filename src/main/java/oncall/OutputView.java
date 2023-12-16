@@ -2,7 +2,6 @@ package oncall;
 
 import java.util.List;
 import oncall.domain.AssignResult;
-import oncall.domain.Employee;
 import oncall.domain.OnCallDayOfWeek;
 import oncall.domain.OnCallMonth;
 

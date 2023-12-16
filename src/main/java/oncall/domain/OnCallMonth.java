@@ -1,5 +1,6 @@
 package oncall.domain;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
 
 public enum OnCallMonth {
@@ -21,6 +22,7 @@ public enum OnCallMonth {
 
     private final int month;
     private final int endDay;
+    private DayOfWeek startDayOfWeek;
 
     OnCallMonth(int month, int endDay) {
         this.month = month;
@@ -32,6 +34,10 @@ public enum OnCallMonth {
                 .filter(onCallMonth -> onCallMonth.month == month)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_MONTH_MESSAGE));
+    }
+
+    public void setStartDayOfWeek(DayOfWeek startDayOfWeek) {
+        this.startDayOfWeek = startDayOfWeek;
     }
 
     public int getEndDay() {

@@ -45,12 +45,12 @@ public class OnCall {
                 } else {
                     Employee picked = holidayRotation.pickOne();
 
-                    //만약 이전 근무자가 Picked와 같다면
+                    //만약 이전 근무자가 picked와 같다면
                     if (!results.isEmpty() && (results.get(results.size() - 1).employee().equals(picked))) {
                         // 한명을 더 뽑아야 하고, 그 사람이 대신 근무를 서게 된다.
                         Employee employee = holidayRotation.pickOne();
                         results.add(new AssignResult(day, onCallMonth.getDayOfWeek(day), employee));
-                        // 다음 주말 로테이션 근무자는 picked가 된다.
+                        // 다음 휴일 로테이션 근무자는 picked가 된다.
                         nextHolidayEmployee = picked;
                     } else {
                         results.add(new AssignResult(day, onCallMonth.getDayOfWeek(day), picked));
@@ -59,19 +59,15 @@ public class OnCall {
             }
 
             if (onCallCalendar.isWorkday(onCallMonth, day)) {
-                // 만약 다음 평일 근무자가 존재한다면, 그 사람을 근무에 우선적으로 투입시켜야 한다.
                 if (nextWorkdayEmployee != null) {
                     results.add(new AssignResult(day, onCallMonth.getDayOfWeek(day), nextWorkdayEmployee));
                     nextWorkdayEmployee = null;
                 } else {
                     Employee picked = workdayRotation.pickOne();
 
-                    //만약 이전 근무자가 Picked와 같다면
                     if (!results.isEmpty() && (results.get(results.size() - 1).employee().equals(picked))) {
-                        // 한명을 더 뽑아야 하고, 그 사람이 대신 근무를 서게 된다.
                         Employee employee = workdayRotation.pickOne();
                         results.add(new AssignResult(day, onCallMonth.getDayOfWeek(day), employee));
-                        // 다음 주말 로테이션 근무자는 picked가 된다.
                         nextWorkdayEmployee = picked;
                     } else {
                         results.add(new AssignResult(day, onCallMonth.getDayOfWeek(day), picked));

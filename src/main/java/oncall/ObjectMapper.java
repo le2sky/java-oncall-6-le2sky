@@ -26,16 +26,16 @@ class ObjectMapper {
         return month;
     }
 
-    private static void checkNumberFormat(String month) {
-        try {
-            Integer.parseInt(month);
-        } catch (NumberFormatException e) {
+    private static void checkValidFormat(String[] split) {
+        if (split.length != ON_CALL_MONTH_ARG_SIZE) {
             throw new IllegalArgumentException(INVALID_FORMAT_MESSAGE);
         }
     }
 
-    private static void checkValidFormat(String[] split) {
-        if (split.length != ON_CALL_MONTH_ARG_SIZE) {
+    private static void checkNumberFormat(String month) {
+        try {
+            Integer.parseInt(month);
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_FORMAT_MESSAGE);
         }
     }

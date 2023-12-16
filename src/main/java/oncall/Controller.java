@@ -10,6 +10,7 @@ class Controller {
     public void run() {
         OnCallMonth onCallMonth = getOnCallMonth();
         OnCall onCall = getOnCall();
+        OutputView.printResult(onCallMonth, onCall.assign(new SimpleOnCallCalendar(), onCallMonth));
     }
 
     private static OnCallMonth getOnCallMonth() {

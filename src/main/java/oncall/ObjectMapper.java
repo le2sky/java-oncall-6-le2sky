@@ -42,7 +42,7 @@ class ObjectMapper {
         Rotation workDayRotation = mapToRotation(workDayRotationString);
         Rotation holiDayRotation = mapToRotation(holiDayRotationString);
 
-        return OnCall.of(workDayRotation, holiDayRotation);
+        return OnCall.of(holiDayRotation, workDayRotation);
     }
 
     private static Rotation mapToRotation(String rotationString) {
